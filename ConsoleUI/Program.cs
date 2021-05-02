@@ -8,9 +8,9 @@ namespace ConsoleUI
 {
     class Program
     {
-        static IItemService _itemService;
+        static IProductService _itemService;
 
-        public Program(IItemService itemService)
+        public Program(IProductService itemService)
         {
             _itemService = itemService;
         }

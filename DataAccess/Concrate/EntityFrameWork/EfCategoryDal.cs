@@ -7,7 +7,7 @@ using Entities.Concrate;
 
 namespace DataAccess.Concrate.EntityFrameWork
 {
-    public class ItemDal : EfEntityRepositoryBase<Item, AutoFinanceContext>, IItemDal
+    public class EfCategoryDal : EfEntityRepositoryBase<Category, AutoFinanceContext>, ICategoryDal
     {
     }
 }

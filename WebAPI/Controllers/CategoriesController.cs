@@ -10,19 +10,19 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ItemController : ControllerBase
+    public class CategoriesController : ControllerBase
     {
-        private IItemService _itemService;
+        private ICategoryService _categoryService;
 
-        public ItemController(IItemService itemService)
+        public CategoriesController(ICategoryService categoryService)
         {
-            _itemService = itemService;
+            _categoryService = categoryService;
         }
 
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _itemService.GetAll();
+            var result = _categoryService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
