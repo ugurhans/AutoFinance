@@ -8,6 +8,7 @@ using Business.Concrate;
 using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
 using DataAccess.Abstract;
+using DataAccess.Concrate.EntityFramework;
 using DataAccess.Concrate.EntityFrameWork;
 
 namespace Business.DependencyResolvers.AutoFac
@@ -24,6 +25,18 @@ namespace Business.DependencyResolvers.AutoFac
 
             builder.RegisterType<SupplierManager>().As<ISupplierService>().SingleInstance();
             builder.RegisterType<EfSupplierDal>().As<ISupplierDal>().SingleInstance();
+
+            builder.RegisterType<CustomerManager>().As<ICustomerService>().SingleInstance();
+            builder.RegisterType<EfCustomerDal>().As<ICustomerDal>().SingleInstance();
+
+
+            builder.RegisterType<TradeManager>().As<ITradeService>().SingleInstance();
+            builder.RegisterType<EfTradeDal>().As<ITradeDal>().SingleInstance();
+
+            builder.RegisterType<WalletManager>().As<IWalletService>().SingleInstance();
+            builder.RegisterType<EfWalletDal>().As<IWalletDal>().SingleInstance();
+
+
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 

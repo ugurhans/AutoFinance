@@ -19,5 +19,6 @@ namespace DataAccess.Concrate.EntityFrameWork
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Trade> Trades { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Wallet> Wallets { get; set; }
     }
 }
