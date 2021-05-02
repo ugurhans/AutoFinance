@@ -17,6 +17,5 @@ namespace Business.Abstract
 
         IDataResult<List<TradeDto>> GetTradeDto();
         IDataResult<List<TradeDto>> GetTradeDtoById(int tradeId);
-
     }
 }

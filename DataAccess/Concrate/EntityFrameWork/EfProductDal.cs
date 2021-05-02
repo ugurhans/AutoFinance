@@ -31,7 +31,7 @@ namespace DataAccess.Concrate.EntityFrameWork
                                  StockAmount = p.StockAmount,
                                  CategoryId = p.CategoryId,
                                  SupplierId = p.SupplierId,
-                                 SupplierName = (from u in context.Users where u.Id == s.UserId select u.Name).FirstOrDefault()
+                                 SupplierName = (from u in context.Users where u.Id == s.UserId select u.Name).FirstOrDefault(),
                              };
                 return filter == null ? result.ToList() : result.Where(filter).ToList();
             }

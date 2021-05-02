@@ -33,7 +33,6 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-
         [HttpGet("getProductsDetail")]
         public IActionResult GetProductsDetail()
         {
@@ -51,18 +50,6 @@ namespace WebAPI.Controllers
         public IActionResult GetProductDetailById(int productId)
         {
             var result = _productService.GetProductDetail(productId);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result);
-        }
-
-        [HttpGet("getProductDetailSupplier")]
-        public IActionResult GetProductDetailSupplier()
-        {
-            var result = _productService.GetProductsDetailBySupplier();
             if (result.Success)
             {
                 return Ok(result);

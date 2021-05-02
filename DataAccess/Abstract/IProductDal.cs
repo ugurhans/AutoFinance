@@ -12,6 +12,5 @@ namespace DataAccess.Abstract
     {
         List<ProductDetailDto> GetProductDetails(Expression<Func<ProductDetailDto, bool>> filter = null);
 
-        //List<ProductDetailDto> GetProductDetailsSupplier(Expression<Func<ProductDetailDto, bool>> filter = null);
     }
 }
