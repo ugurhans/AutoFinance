@@ -47,14 +47,15 @@ namespace Business.Concrate
             return new SuccessResult(Messages.CustomerUpdated);
         }
 
-        public IDataResult<List<CustomerDto>> GetSuppliersDto()
+        public IDataResult<List<CustomerDto>> GetAllCustomersDto()
         {
             return new SuccessDataResult<List<CustomerDto>>(_customerDal.getCustomerDtos());
         }
 
-        public IDataResult<List<CustomerDto>> GetSupplierDtoById(int customerId)
+        public IDataResult<List<CustomerDto>> GetAllCustomersDtoById(int customerId)
         {
             return new SuccessDataResult<List<CustomerDto>>(_customerDal.getCustomerDtos(c => c.Id == customerId));
         }
+
     }
 }

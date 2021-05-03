@@ -32,6 +32,7 @@ namespace DataAccess.Concrate.EntityFrameWork
                                  CategoryId = p.CategoryId,
                                  SupplierId = p.SupplierId,
                                  SupplierName = (from u in context.Users where u.Id == s.UserId select u.Name).FirstOrDefault(),
+                                 ToVerify = p.ToVerify
                              };
                 return filter == null ? result.ToList() : result.Where(filter).ToList();
             }

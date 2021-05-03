@@ -11,12 +11,16 @@ namespace Business.Abstract
     {
         IDataResult<List<Customer>> GetAll();
         IDataResult<Customer> GetById(int customerId);
+
+        IDataResult<List<CustomerDto>> GetAllCustomersDto();
+        IDataResult<List<CustomerDto>> GetAllCustomersDtoById(int customerId);
+
+
         IResult Add(Customer customer);
         IResult Delete(Customer customer);
         IResult Update(Customer customer);
 
-        IDataResult<List<CustomerDto>> GetSuppliersDto();
-        IDataResult<List<CustomerDto>> GetSupplierDtoById(int customerId);
+
 
     }
 }

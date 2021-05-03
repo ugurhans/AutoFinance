@@ -20,11 +20,10 @@ namespace WebAPI.Controllers
             _productService = itemService;
         }
 
-
-        [HttpGet("getall")]
-        public IActionResult GetAll()
+        [HttpGet("getallproducts")]
+        public IActionResult getAllProducts()
         {
-            var result = _productService.GetAll();
+            var result = _productService.GetAllProducts();
             if (result.Success)
             {
                 return Ok(result);
@@ -33,10 +32,34 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getProductsDetail")]
-        public IActionResult GetProductsDetail()
+        [HttpGet("getproductbyid")]
+        public IActionResult getProductById(int productId)
         {
-            var result = _productService.GetProductsDetail();
+            var result = _productService.GetProductById(productId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+        [HttpGet("getallproductsbycategoryıd")]
+        public IActionResult getAllProductsByCategoryId(int categoryId)
+        {
+            var result = _productService.GetAllProductByCategoryId(categoryId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+        [HttpGet("getallproductsdto")]
+        public IActionResult getAllProductsDto()
+        {
+            var result = _productService.GetAllProductsDto();
             if (result.Success)
             {
                 return Ok(result);
@@ -46,10 +69,10 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpGet("getProductDetailById")]
-        public IActionResult GetProductDetailById(int productId)
+        [HttpGet("getallproductsunverified")]
+        public IActionResult getAllProductsUnVerified()
         {
-            var result = _productService.GetProductDetail(productId);
+            var result = _productService.GetAllProductUnVerified();
             if (result.Success)
             {
                 return Ok(result);
@@ -58,10 +81,11 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getProductDetailSupplierId")]
-        public IActionResult GetProductDetailSupplierId(int supplierId)
+
+        [HttpGet("getallproductdtounverified")]
+        public IActionResult getAllProductsDtoUnVerified()
         {
-            var result = _productService.GetProductsDetailBySupplierId(supplierId);
+            var result = _productService.GetAllProductDtoUnVerified();
             if (result.Success)
             {
                 return Ok(result);
@@ -70,10 +94,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getProductsDetailByCategoryId")]
-        public IActionResult GetProductsDetailByCategoryId(int categoryId)
+        [HttpGet("getallproductsverified")]
+        public IActionResult getAllProductsVerified()
         {
-            var result = _productService.GetProductsDetailByCategory(categoryId);
+            var result = _productService.GetAllProductVerified();
             if (result.Success)
             {
                 return Ok(result);
@@ -82,39 +106,68 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("add")]
-        public IActionResult Add(Product product)
+
+        [HttpGet("getallproductdtoverified")]
+        public IActionResult getAllProductsDtoVerified()
+        {
+            var result = _productService.GetAllProductDtoVerified();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+        [HttpPost("addproduct")]
+        public IActionResult addProduct(Product product)
         {
             var result = _productService.Add(product);
             if (result.Success)
             {
                 return Ok(result);
             }
+
             return BadRequest(result);
         }
 
 
-        [HttpPost("delete")]
-        public IActionResult Delete(Product product)
+        [HttpPost("deleteproduct")]
+        public IActionResult deleteProduct(Product product)
         {
             var result = _productService.Delete(product);
             if (result.Success)
             {
                 return Ok(result);
             }
+
             return BadRequest(result);
         }
 
-
-        [HttpPost("update")]
-        public IActionResult Update(Product product)
+        [HttpPost("updateproduct")]
+        public IActionResult updateProduct(Product product)
         {
+            product.ToVerify = false;
             var result = _productService.Update(product);
             if (result.Success)
             {
                 return Ok(result);
             }
-            return BadRequest(result.Message);
+
+            return BadRequest(result);
         }
+
+        [HttpPost("verifyproduct")]
+        public IActionResult verifyProduct(Product product)
+        {
+            var result = _productService.ToVerify(product);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
     }
 }

@@ -16,5 +16,6 @@ namespace Entities.DTOs
         public string SupplierName { get; set; }
         public int CategoryId { get; set; }
         public int SupplierId { get; set; }
+        public bool ToVerify { get; set; }
     }
 }

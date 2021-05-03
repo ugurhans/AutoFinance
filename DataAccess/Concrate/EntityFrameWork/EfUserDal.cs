@@ -4,36 +4,33 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using Core.DataAccess.EntityFramework;
+using Core.Entities.Concrate;
 using DataAccess.Abstract;
 using Entities.Concrate;
 using Entities.DTOs;
 
 namespace DataAccess.Concrate.EntityFrameWork
 {
-    public class EfCustomerDal : EfEntityRepositoryBase<Customer, AutoFinanceContext>, ICustomerDal
+    public class EfUserDal : EfEntityRepositoryBase<User, AutoFinanceContext>, IUserDal
     {
-        public List<CustomerDto> getCustomerDtos(Expression<Func<CustomerDto, bool>> filter = null)
+        public List<UserDto> getUserDtos(Expression<Func<UserDto, bool>> filter = null)
         {
             using (AutoFinanceContext context = new AutoFinanceContext())
             {
-                var result = from c in context.Customers
-                             join u in context.Users
-                                 on c.Id equals u.Id
+                var result = from u in context.Users
                              join w in context.Wallets
-                                 on c.WalletId equals w.Id
+                                 on u.WalletId equals w.Id
 
-                             select new CustomerDto()
+                             select new UserDto()
                              {
-                                 Id = c.Id,
+                                 Id = u.Id,
                                  Name = u.Name,
                                  LastName = u.LastName,
                                  Email = u.Email,
                                  Balance = w.Balance
-
                              };
                 return filter == null ? result.ToList() : result.Where(filter).ToList();
             }
         }
     }
 }
-

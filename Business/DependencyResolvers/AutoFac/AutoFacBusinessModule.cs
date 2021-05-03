@@ -36,6 +36,9 @@ namespace Business.DependencyResolvers.AutoFac
             builder.RegisterType<WalletManager>().As<IWalletService>().SingleInstance();
             builder.RegisterType<EfWalletDal>().As<IWalletDal>().SingleInstance();
 
+            builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
+            builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
+
 
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();

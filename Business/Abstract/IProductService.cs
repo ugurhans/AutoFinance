@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Business.BusinessAspect;
 using Core.Utilities.Results;
 using Entities.Concrate;
 using Entities.DTOs;
@@ -9,21 +10,20 @@ namespace Business.Abstract
 {
     public interface IProductService
     {
-        IDataResult<List<Product>> GetAllVerifed();
-        IDataResult<List<Product>> GetAll();
-        IDataResult<Product> GetById(int productId);
+
+        IDataResult<List<Product>> GetAllProducts();
+        IDataResult<Product> GetProductById(int productId);
+        IDataResult<List<Product>> GetAllProductByCategoryId(int categoryId);
+        IDataResult<List<ProductDetailDto>> GetAllProductsDto();
+        IDataResult<List<Product>> GetAllProductUnVerified();
+        IDataResult<List<ProductDetailDto>> GetAllProductDtoUnVerified();
+        IDataResult<List<Product>> GetAllProductVerified();
+        IDataResult<List<ProductDetailDto>> GetAllProductDtoVerified();
+
         IResult Add(Product product);
         IResult Delete(Product product);
         IResult Update(Product product);
-
-        IResult Verify(Product product);
-
-        IDataResult<List<ProductDetailDto>> GetProductsDetail();
-        IDataResult<List<ProductDetailDto>> GetProductDetail(int productId);
-        IDataResult<List<ProductDetailDto>> GetProductsDetailByCategory(int categoryId);
-        IDataResult<List<ProductDetailDto>> GetProductsDetailBySupplierId(int supplierId);
-
-        public bool ChechVerify(int productId);
+        IResult ToVerify(Product product);
 
 
     }

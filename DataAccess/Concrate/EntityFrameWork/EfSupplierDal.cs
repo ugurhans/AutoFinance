@@ -26,7 +26,7 @@ namespace DataAccess.Concrate.EntityFrameWork
                                  Name = u.Name,
                                  LastName = u.LastName,
                                  Email = u.Email,
-                                 Wallet = u.Wallet,
+                                 Wallet = u.WalletId,
 
                              };
                 return filter == null ? result.ToList() : result.Where(filter).ToList();

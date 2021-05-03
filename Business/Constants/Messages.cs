@@ -9,6 +9,7 @@ namespace Business.Constants
         public static string ProductAdded = "Product Added";
         public static string ProductDeleted = "Product Deleted";
         public static string ProductUpdated = "Product Updated";
+        public static string productVerified = "Product Verified";
 
         public static string CategoryDeleted = "Category Deleted";
         public static string CategoryUpdated = "Category Updated";
@@ -25,5 +26,6 @@ namespace Business.Constants
         public static string TradeSuccess = "Trade is Success";
         public static string TradeDeleted = "Trade is Deleted";
         public static string TradeUpdated = "Trade is Updated";
+
     }
 }

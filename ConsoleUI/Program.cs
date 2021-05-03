@@ -19,18 +19,5 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
 
-            var result = _itemService.GetAll();
-            if (result.Success == true)
-            {
-                foreach (var item in result.Data)
-                {
-                    Console.WriteLine(item.Name + "/" + item.Price + "/" + item.Description + "/" + item.StockAmount);
-                }
-            }
-            else
-            {
-                Console.WriteLine(result.Message);
-            }
+
         }
-    }
-}

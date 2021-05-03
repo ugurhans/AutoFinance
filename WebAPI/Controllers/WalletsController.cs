@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Business.Abstract;
+using Entities.Concrate;
 
 namespace WebAPI.Controllers
 {
@@ -35,6 +36,18 @@ namespace WebAPI.Controllers
         public IActionResult GetAllById(int walletId)
         {
             var result = _walletService.GetById(walletId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+        [HttpPost("addwallet")]
+        public IActionResult addUser(Wallet wallet)
+        {
+            var result = _walletService.Add(wallet);
             if (result.Success)
             {
                 return Ok(result);

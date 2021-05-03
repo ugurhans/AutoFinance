@@ -21,34 +21,51 @@ namespace Business.Concrate
         }
 
 
-        public IDataResult<List<Product>> GetAllVerifed()
+        public IDataResult<List<Product>> GetAllProducts()
         {
+            return new SuccessDataResult<List<Product>>(_productDal.GetAll());
+        }
 
+        public IDataResult<Product> GetProductById(int productId)
+        {
+            return new SuccessDataResult<Product>(_productDal.Get(p => p.Id == productId));
+        }
+
+        public IDataResult<List<Product>> GetAllProductByCategoryId(int categoryId)
+        {
+            return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == categoryId));
+        }
+
+        public IDataResult<List<ProductDetailDto>> GetAllProductsDto()
+        {
+            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails());
+        }
+
+        public IDataResult<List<Product>> GetAllProductUnVerified()
+        {
+            return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.ToVerify == false));
+        }
+
+        public IDataResult<List<ProductDetailDto>> GetAllProductDtoUnVerified()
+        {
+            return new SuccessDataResult<List<ProductDetailDto>>(
+                _productDal.GetProductDetails(p => p.ToVerify == false));
+        }
+
+        public IDataResult<List<Product>> GetAllProductVerified()
+        {
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.ToVerify == true));
         }
 
-        public IDataResult<List<Product>> GetAll()
+        public IDataResult<List<ProductDetailDto>> GetAllProductDtoVerified()
         {
-            return new SuccessDataResult<List<Product>>(_productDal.GetAll());
-
-        }
-
-        public IDataResult<Product> GetById(int productId)
-        {
-            if (ChechVerify(productId))
-            {
-                return new SuccessDataResult<Product>(_productDal.Get(p => p.Id == productId));
-            }
-
-
-
-            return new ErrorDataResult<Product>();
+            return new SuccessDataResult<List<ProductDetailDto>>(
+                _productDal.GetProductDetails(p => p.ToVerify == true));
         }
 
         public IResult Add(Product product)
         {
             _productDal.Add(product);
-            Verify(product);
             return new SuccessResult(Messages.ProductAdded);
         }
 
@@ -64,50 +81,11 @@ namespace Business.Concrate
             return new SuccessResult(Messages.ProductUpdated);
         }
 
-        public IResult Verify(Product product)
+        public IResult ToVerify(Product product)
         {
             product.ToVerify = true;
             _productDal.Update(product);
-            return new SuccessResult();
-        }
-
-        public IDataResult<List<ProductDetailDto>> GetProductsDetail()
-        {
-            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails());
-        }
-
-        public IDataResult<List<ProductDetailDto>> GetProductDetail(int productId)
-        {
-            if (ChechVerify(productId))
-            {
-                return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(p => p.Id == productId));
-
-            }
-
-            return new ErrorDataResult<List<ProductDetailDto>>("Doğrulanmamış Ürün");
-        }
-
-        public IDataResult<List<ProductDetailDto>> GetProductsDetailByCategory(int categoryId)
-        {
-            return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails(p => p.CategoryId == categoryId));
-        }
-
-
-        public IDataResult<List<ProductDetailDto>> GetProductsDetailBySupplierId(int supplierId)
-        {
-            return new SuccessDataResult<List<ProductDetailDto>>(
-                _productDal.GetProductDetails(p => p.SupplierId == supplierId));
-        }
-
-        public bool ChechVerify(int productId)
-        {
-            bool verify = _productDal.Get(p => p.Id == productId).ToVerify;
-            if (verify)
-            {
-                return true;
-            }
-
-            return false;
+            return new SuccessResult(Messages.productVerified);
         }
     }
 }
