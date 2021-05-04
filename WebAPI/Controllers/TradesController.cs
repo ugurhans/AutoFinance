@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Business.Abstract;
+using Entities.Concrate;
 
 namespace WebAPI.Controllers
 {
@@ -23,6 +24,18 @@ namespace WebAPI.Controllers
         public IActionResult GetAll()
         {
             var result = _tradeService.GetAll();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+        [HttpGet("getById")]
+        public IActionResult GetById(int tradeId)
+        {
+            var result = _tradeService.GetById(tradeId);
             if (result.Success)
             {
                 return Ok(result);
@@ -54,5 +67,43 @@ namespace WebAPI.Controllers
 
             return BadRequest(result);
         }
+
+        [HttpPost("addtrade")]
+        public IActionResult addTrade(Trade trade)
+        {
+            var result = _tradeService.Add(trade);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+        [HttpPost("deletetrade")]
+        public IActionResult addeleteTrade(Trade trade)
+        {
+            var result = _tradeService.Delete(trade);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+
+        [HttpPost("updateTrade")]
+        public IActionResult updateTrade(Trade trade)
+        {
+            var result = _tradeService.Update(trade);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
     }
 }

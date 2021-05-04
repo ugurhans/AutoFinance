@@ -16,5 +16,6 @@ namespace Business.Abstract
         IResult Update(User user);
 
         IDataResult<List<UserDto>> getAllUserDto();
+        IDataResult<List<UserDto>> getAllUserDtoById(int userId);
     }
 }

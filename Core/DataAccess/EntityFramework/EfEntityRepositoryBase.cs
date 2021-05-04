@@ -21,7 +21,6 @@ namespace Core.DataAccess.EntityFramework
                     : context.Set<TEntity>().Where(filter).ToList();
 
             }
-
         }
 
         public TEntity Get(Expression<Func<TEntity, bool>> filter)

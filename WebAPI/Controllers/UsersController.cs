@@ -90,5 +90,17 @@ namespace WebAPI.Controllers
 
             return BadRequest(result);
         }
+
+        [HttpGet("getallusersdtobyid")]
+        public IActionResult getAllUsersDtoById(int userId)
+        {
+            var result = _userService.getAllUserDtoById(userId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
     }
 }

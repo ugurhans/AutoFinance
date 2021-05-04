@@ -50,5 +50,10 @@ namespace Business.Concrate
         {
             return new SuccessDataResult<List<UserDto>>(_userDal.getUserDtos());
         }
+
+        public IDataResult<List<UserDto>> getAllUserDtoById(int userId)
+        {
+            return new SuccessDataResult<List<UserDto>>(_userDal.getUserDtos(u => u.Id == userId));
+        }
     }
 }
