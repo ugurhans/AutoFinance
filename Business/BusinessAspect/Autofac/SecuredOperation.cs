@@ -23,6 +23,17 @@ namespace Business.BusinessAspect
 
         }
 
-
+        protected override void OnBefore(IInvocation invocation)
+        {
+            var roleClaims = _httpContextAccessor.HttpContext.User.ClaimRoles();
+            foreach (var role in _roles)
+            {
+                if (roleClaims.Contains(role))
+                {
+                    return;
+                }
+            }
+            throw new Exception(Messages.AuthorizationDenied);
+        }
     }
 }

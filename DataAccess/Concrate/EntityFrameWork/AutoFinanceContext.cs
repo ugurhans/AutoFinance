@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Entities.Concrate;
 using Entities.Concrate;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,5 +21,7 @@ namespace DataAccess.Concrate.EntityFrameWork
         public DbSet<Trade> Trades { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Wallet> Wallets { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
     }
 }

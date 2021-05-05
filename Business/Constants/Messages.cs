@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Entities.Concrate;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -26,6 +27,14 @@ namespace Business.Constants
         public static string TradeSuccess = "Trade is Success";
         public static string TradeDeleted = "Trade is Deleted";
         public static string TradeUpdated = "Trade is Updated";
+
+        public static string AuthorizationDenied = "Yetkiniz bulunmamaktadır";
+        internal static string UserRegistered = "Kayıt Olundu";
+        internal static string UserNotFound = "Kullanıcı Bulunamadı";
+        internal static string PasswordError = "Şifreyi Yanlış girdiniz";
+        internal static string SuccessfulLogin = "Başarıyla giriş yapıldı.";
+        internal static string UserAlreadyExists = "Kullanıcı zaten mevcur.";
+        internal static string AccessTokenCreated = "Giriş Tokenı Yaratıldı";
 
     }
 }

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
+using Core.Entities.Concrate;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using Entities.Concrate;
 using Entities.DTOs;
 
 namespace Business.Concrate
@@ -28,6 +28,11 @@ namespace Business.Concrate
             return new SuccessDataResult<User>(_userDal.Get(u => u.Id == userId));
         }
 
+        public User GetByMail(string email)
+        {
+            return _userDal.Get(u => u.Email == email);
+        }
+
         public IResult Add(User user)
         {
             _userDal.Add(user);
@@ -44,6 +49,11 @@ namespace Business.Concrate
         {
             _userDal.Update(user);
             return new SuccessResult();
+        }
+
+        public List<OperationClaim> GetClaims(User user)
+        {
+            return _userDal.GetClaims(user);
         }
 
         public IDataResult<List<UserDto>> getAllUserDto()

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
+using Business.BusinessAspect;
 using Business.Constants;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
@@ -20,7 +21,7 @@ namespace Business.Concrate
             _productDal = productDal;
         }
 
-
+        [SecuredOperation("admin")]
         public IDataResult<List<Product>> GetAllProducts()
         {
             return new SuccessDataResult<List<Product>>(_productDal.GetAll());
@@ -63,29 +64,37 @@ namespace Business.Concrate
                 _productDal.GetProductDetails(p => p.ToVerify == true));
         }
 
+        [SecuredOperation("admin,supplier")]
         public IResult Add(Product product)
         {
             _productDal.Add(product);
             return new SuccessResult(Messages.ProductAdded);
         }
 
+        [SecuredOperation("admin,supplier")]
         public IResult Delete(Product product)
         {
             _productDal.Delete(product);
             return new SuccessResult(Messages.ProductDeleted);
         }
 
+        [SecuredOperation("admin,supplier")]
         public IResult Update(Product product)
         {
             _productDal.Update(product);
             return new SuccessResult(Messages.ProductUpdated);
         }
 
+
+        [SecuredOperation("admin")]
         public IResult ToVerify(Product product)
         {
             product.ToVerify = true;
             _productDal.Update(product);
             return new SuccessResult(Messages.productVerified);
         }
+
+
+
     }
 }

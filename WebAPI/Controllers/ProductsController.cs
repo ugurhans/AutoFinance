@@ -147,7 +147,6 @@ namespace WebAPI.Controllers
         [HttpPost("updateproduct")]
         public IActionResult updateProduct(Product product)
         {
-            product.ToVerify = false;
             var result = _productService.Update(product);
             if (result.Success)
             {
