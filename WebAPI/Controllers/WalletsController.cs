@@ -45,9 +45,33 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("addwallet")]
-        public IActionResult addUser(Wallet wallet)
+        public IActionResult addWallet(Wallet wallet)
         {
             var result = _walletService.Add(wallet);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+        [HttpPost("updatewallet")]
+        public IActionResult updateWallet(Wallet wallet)
+        {
+            var result = _walletService.Update(wallet);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+        [HttpPost("verifywallet")]
+        public IActionResult berifyWallet(Wallet wallet)
+        {
+            var result = _walletService.VerifyWallet(wallet);
             if (result.Success)
             {
                 return Ok(result);

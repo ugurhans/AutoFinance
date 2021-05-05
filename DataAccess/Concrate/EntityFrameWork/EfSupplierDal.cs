@@ -19,6 +19,8 @@ namespace DataAccess.Concrate.EntityFrameWork
                 var result = from s in context.Suppliers
                              join u in context.Users
                                  on s.UserId equals u.Id
+                             join w in context.Wallets
+                                 on u.Id equals w.UserId
 
                              select new SupplierDto()
                              {
@@ -26,7 +28,7 @@ namespace DataAccess.Concrate.EntityFrameWork
                                  Name = u.Name,
                                  LastName = u.LastName,
                                  Email = u.Email,
-                                 Wallet = u.WalletId,
+                                 Wallet = w.Balance,
 
                              };
                 return filter == null ? result.ToList() : result.Where(filter).ToList();

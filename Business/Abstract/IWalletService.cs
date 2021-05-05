@@ -13,5 +13,7 @@ namespace Business.Abstract
         IResult Add(Wallet wallet);
         IResult Delete(Wallet wallet);
         IResult Update(Wallet wallet);
+
+        IResult VerifyWallet(Wallet wallet);
     }
 }

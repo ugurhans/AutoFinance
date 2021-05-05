@@ -14,6 +14,7 @@ namespace Entities.DTOs
         public DateTime SellDate { get; set; }
         public int TradeAmount { get; set; }
         public string CustomerName { get; set; }
+        public string ProductName { get; set; }
         public string SupplierName { get; set; }
     }
 }

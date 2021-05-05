@@ -44,5 +44,12 @@ namespace Business.Concrate
             _walletDal.Update(wallet);
             return new SuccessResult(message: "Wallet Updated");
         }
+
+        public IResult VerifyWallet(Wallet wallet)
+        {
+            wallet.ToVerify = true;
+            _walletDal.Update(wallet);
+            return new SuccessResult("Wallet Verified");
+        }
     }
 }

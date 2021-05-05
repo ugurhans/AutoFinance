@@ -15,7 +15,6 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(u => u.Email).EmailAddress();
             RuleFor(u => u.LastName).NotEmpty();
             RuleFor(u => u.Name).NotEmpty();
-            RuleFor(u => u.WalletId).NotEmpty();
             RuleFor(u => u.Name).MinimumLength(2);
             RuleFor(u => u.LastName).MinimumLength(2);
 

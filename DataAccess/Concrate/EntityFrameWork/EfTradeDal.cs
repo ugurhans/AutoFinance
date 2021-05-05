@@ -23,6 +23,10 @@ namespace DataAccess.Concrate.EntityFrameWork
                                  on t.CustomerId equals c.Id
                              join p in context.Products
                                  on t.ProductId equals p.Id
+                             join u in context.Users
+                                 on s.UserId equals u.Id
+                             join us in context.Users
+                                 on c.UserId equals us.Id
                              select new TradeDto()
                              {
                                  Id = t.Id,
@@ -30,7 +34,11 @@ namespace DataAccess.Concrate.EntityFrameWork
                                  CustomerId = c.Id,
                                  ProductId = p.Id,
                                  SellDate = t.SellDate,
-                                 TradeAmount = t.TradeAmount
+                                 TradeAmount = t.TradeAmount,
+                                 SupplierName = u.Name,
+                                 CustomerName = us.Name,
+                                 ProductName = p.Name
+
 
                              };
                 return filter == null ? result.ToList() : result.Where(filter).ToList();

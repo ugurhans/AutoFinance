@@ -18,7 +18,7 @@ namespace DataAccess.Concrate.EntityFrameWork
             {
                 var result = from u in context.Users
                              join w in context.Wallets
-                                 on u.WalletId equals w.Id
+                                 on u.Id equals w.UserId
 
                              select new UserDto()
                              {

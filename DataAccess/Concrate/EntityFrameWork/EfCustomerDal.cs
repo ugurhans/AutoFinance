@@ -20,8 +20,7 @@ namespace DataAccess.Concrate.EntityFrameWork
                              join u in context.Users
                                  on c.Id equals u.Id
                              join w in context.Wallets
-                                 on c.WalletId equals w.Id
-
+                                 on u.Id equals w.UserId
                              select new CustomerDto()
                              {
                                  Id = c.Id,
