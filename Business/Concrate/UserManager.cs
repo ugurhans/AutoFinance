@@ -33,6 +33,11 @@ namespace Business.Concrate
             return _userDal.Get(u => u.Email == email);
         }
 
+        public IDataResult<User> GetByEmailData(string email)
+        {
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
+        }
+
         public IResult Add(User user)
         {
             _userDal.Add(user);

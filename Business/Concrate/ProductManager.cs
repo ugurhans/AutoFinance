@@ -83,9 +83,9 @@ namespace Business.Concrate
         }
 
 
-        [CacheAspect(10)]
+        [CacheRemoveAspect("IProductService.Get")]
         [ValidationAspect(typeof(ProductValidator))]
-        //[SecuredOperation("admin,supplier")]
+        [SecuredOperation("supplier")]
         public IResult Add(Product product)
         {
             product.ToVerify = false;
@@ -95,7 +95,7 @@ namespace Business.Concrate
 
 
         [CacheRemoveAspect("IProductService.Get")]
-        //[SecuredOperation("admin,supplier")]
+        [SecuredOperation("admin,supplier")]
         public IResult Delete(Product product)
         {
             _productDal.Delete(product);
@@ -104,7 +104,7 @@ namespace Business.Concrate
 
 
         [CacheRemoveAspect("IProductService.Get")]
-        //[SecuredOperation("admin,supplier")]
+        [SecuredOperation("admin,supplier")]
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Update(Product product)
         {
@@ -114,7 +114,7 @@ namespace Business.Concrate
         }
 
 
-        //[SecuredOperation("admin")]
+        [SecuredOperation("admin")]
         [CacheRemoveAspect("IProductService.Get")]
         public IResult ToVerify(Product product)
         {

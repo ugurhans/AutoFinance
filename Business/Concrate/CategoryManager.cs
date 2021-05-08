@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
+using Business.BusinessAspect;
 using Business.Constants;
 using Core.Aspects.Autofac.Caching;
 using Core.Utilities.Results;
@@ -30,18 +31,23 @@ namespace Business.Concrate
             return new SuccessDataResult<Category>(_categoryDal.Get(c => c.Id == categoryId));
         }
 
+
+        [SecuredOperation(("category.add,admin"))]
         public IResult Add(Category category)
         {
             _categoryDal.Add(category);
             return new SuccessResult(Messages.CategoryAdded);
         }
 
+        [SecuredOperation("category.delete,admin")]
         public IResult Delete(Category category)
         {
             _categoryDal.Delete(category);
             return new SuccessResult(Messages.CategoryDeleted);
         }
 
+
+        [SecuredOperation("category.update,admin")]
         public IResult Update(Category category)
         {
             _categoryDal.Update(category);
