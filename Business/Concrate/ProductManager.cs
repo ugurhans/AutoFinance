@@ -123,7 +123,10 @@ namespace Business.Concrate
             return new SuccessResult(Messages.productVerified);
         }
 
-
-
+        public IDataResult<List<ProductDetailDto>> GetAllProductsDtoBySId(int suplierId)
+        {
+            return new SuccessDataResult<List<ProductDetailDto>>(
+                _productDal.GetProductDetails(p => p.SupplierId == suplierId));
+        }
     }
 }

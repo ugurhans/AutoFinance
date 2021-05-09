@@ -21,6 +21,6 @@ namespace Business.Abstract
         IResult Update(Customer customer);
 
 
-
+        IDataResult<Customer> GetByUserId(int userId);
     }
 }

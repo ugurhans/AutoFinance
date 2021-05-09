@@ -72,5 +72,10 @@ namespace Business.Concrate
             _customerDal.Update(customer);
             return new SuccessResult(Messages.CustomerUpdated);
         }
+
+        public IDataResult<Customer> GetByUserId(int userId)
+        {
+            return new SuccessDataResult<Customer>(_customerDal.Get(c => c.UserId == userId));
+        }
     }
 }

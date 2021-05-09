@@ -113,5 +113,17 @@ namespace WebAPI.Controllers
 
             return BadRequest(result);
         }
+
+        [HttpGet("getuserdtobymail")]
+        public IActionResult getUserDtoByMail(string email)
+        {
+            var result = _userService.GetUserDtoByMail(email);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
     }
 }

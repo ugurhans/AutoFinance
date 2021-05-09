@@ -68,6 +68,17 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getallproductsdtobySupplierId")]
+        public IActionResult getAllProductsDtoBySId(int supplierId)
+        {
+            var result = _productService.GetAllProductsDtoBySId(supplierId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
 
         [HttpGet("getallproductsunverified")]
         public IActionResult getAllProductsUnVerified()

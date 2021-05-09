@@ -20,5 +20,6 @@ namespace Business.Abstract
         List<OperationClaim> GetClaims(User user);
         IDataResult<List<UserDto>> getAllUserDto();
         IDataResult<List<UserDto>> getAllUserDtoById(int userId);
+        IDataResult<List<UserDto>> GetUserDtoByMail(string email);
     }
 }

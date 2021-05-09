@@ -70,5 +70,10 @@ namespace Business.Concrate
         {
             return new SuccessDataResult<List<UserDto>>(_userDal.getUserDtos(u => u.Id == userId));
         }
+
+        public IDataResult<List<UserDto>> GetUserDtoByMail(string email)
+        {
+            return new SuccessDataResult<List<UserDto>>(_userDal.getUserDtos(u => u.Email == email));
+        }
     }
 }
