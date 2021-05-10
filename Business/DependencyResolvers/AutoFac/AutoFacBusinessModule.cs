@@ -38,6 +38,10 @@ namespace Business.DependencyResolvers.AutoFac
             builder.RegisterType<WalletManager>().As<IWalletService>().SingleInstance();
             builder.RegisterType<EfWalletDal>().As<IWalletDal>().SingleInstance();
 
+
+            builder.RegisterType<OrderManager>().As<IOrderService>().SingleInstance();
+            builder.RegisterType<EfOrderDal>().As<IOrderDal>().SingleInstance();
+
             builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
             builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
 

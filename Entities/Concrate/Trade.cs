@@ -13,5 +13,7 @@ namespace Entities.Concrate
         public int SupplierId { get; set; }
         public DateTime SellDate { get; set; }
         public int TradeAmount { get; set; }
+        public int OrderId { get; set; }
+
     }
 }

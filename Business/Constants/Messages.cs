@@ -36,5 +36,8 @@ namespace Business.Constants
         internal static string UserAlreadyExists = "Kullanıcı zaten mevcur.";
         internal static string AccessTokenCreated = "Giriş Tokenı Yaratıldı";
 
+        internal static string OrderAdd = "Order Add";
+        internal static string OrderDelete = "Order Delete";
+        internal static string OrderUpdate = "Order Update";
     }
 }

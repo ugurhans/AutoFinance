@@ -23,5 +23,6 @@ namespace DataAccess.Concrate.EntityFrameWork
         public DbSet<Wallet> Wallets { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }

@@ -10,7 +10,6 @@ namespace Business.ValidationRules.FluentValidation
     {
         public WalletValidator()
         {
-            RuleFor(w => w.ToVerify).NotEmpty();
             RuleFor(w => w.UserId).NotEmpty();
         }
     }

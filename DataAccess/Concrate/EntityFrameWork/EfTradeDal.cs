@@ -27,6 +27,8 @@ namespace DataAccess.Concrate.EntityFrameWork
                                  on s.UserId equals u.Id
                              join us in context.Users
                                  on c.UserId equals us.Id
+                             join o in context.Orders
+                                 on t.OrderId equals o.Id
                              select new TradeDto()
                              {
                                  Id = t.Id,
@@ -37,7 +39,9 @@ namespace DataAccess.Concrate.EntityFrameWork
                                  TradeAmount = t.TradeAmount,
                                  SupplierName = u.Name,
                                  CustomerName = us.Name,
-                                 ProductName = p.Name
+                                 ProductName = p.Name,
+                                 TradePrice = o.Price,
+                                 OrderId = o.Id
 
 
                              };
