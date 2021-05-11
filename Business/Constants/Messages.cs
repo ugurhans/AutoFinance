@@ -39,5 +39,6 @@ namespace Business.Constants
         internal static string OrderAdd = "Order Add";
         internal static string OrderDelete = "Order Delete";
         internal static string OrderUpdate = "Order Update";
+        internal static string ClaimAlreadyExists;
     }
 }

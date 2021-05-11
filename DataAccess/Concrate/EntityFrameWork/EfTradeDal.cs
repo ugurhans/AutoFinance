@@ -32,16 +32,14 @@ namespace DataAccess.Concrate.EntityFrameWork
                              select new TradeDto()
                              {
                                  Id = t.Id,
-                                 SupplierId = s.Id,
-                                 CustomerId = c.Id,
-                                 ProductId = p.Id,
+
                                  SellDate = t.SellDate,
                                  TradeAmount = t.TradeAmount,
                                  SupplierName = u.Name,
                                  CustomerName = us.Name,
                                  ProductName = p.Name,
                                  TradePrice = o.Price,
-                                 OrderId = o.Id
+
 
 
                              };

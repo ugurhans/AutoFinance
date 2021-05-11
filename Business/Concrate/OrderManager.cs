@@ -6,6 +6,7 @@ using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrate;
+using Entities.DTOs;
 
 namespace Business.Concrate
 {
@@ -44,6 +45,17 @@ namespace Business.Concrate
         {
             _orderDal.Update(order);
             return new SuccessResult(Messages.OrderUpdate);
+        }
+
+        public IDataResult<List<OrderDto>> GetOrdersDto()
+        {
+            return new SuccessDataResult<List<OrderDto>>(_orderDal.GetOrderDetail());
+
+        }
+
+        public IDataResult<List<OrderDto>> GetOrderDtoByUserId(int userId)
+        {
+            return new SuccessDataResult<List<OrderDto>>(_orderDal.GetOrderDetail(o => o.Id == userId));
         }
     }
 }

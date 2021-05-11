@@ -32,6 +32,30 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getalldto")]
+        public IActionResult GetAllDto()
+        {
+            var result = _orderService.GetOrdersDto();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+        [HttpGet("getalldtobyuserid")]
+        public IActionResult GetAll(int userId)
+        {
+            var result = _orderService.GetOrderDtoByUserId(userId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
         [HttpGet("getbyid")]
         public IActionResult getById(int orderId)
         {
