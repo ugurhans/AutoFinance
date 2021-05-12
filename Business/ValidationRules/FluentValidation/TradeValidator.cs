@@ -10,7 +10,7 @@ namespace Business.ValidationRules.FluentValidation
     {
         public TradeValidator()
         {
-            RuleFor(t => t.OrderId).Equal(t => t.SupplierId);
+
             RuleFor(t => t.SellDate).NotEmpty();
             RuleFor(t => t.TradeAmount).GreaterThan(1);
             RuleFor(t => t.TradeAmount).NotEmpty();

@@ -16,13 +16,7 @@ namespace Business.Constants
         public static string CategoryUpdated = "Category Updated";
         public static string CategoryAdded = "Category Added";
 
-        public static string SupplierAdded = "SupplierAdded";
-        public static string SupplierDeleted = "Supplier Deleted";
-        public static string SupplierUpdated = "Supplier Updated";
 
-        public static string CustomerAdded = "Customer Added";
-        public static string CustomerDeleted = "Customer Deleted";
-        public static string CustomerUpdated = "Customer Updated";
 
         public static string TradeSuccess = "Trade is Success";
         public static string TradeDeleted = "Trade is Deleted";
@@ -39,6 +33,7 @@ namespace Business.Constants
         internal static string OrderAdd = "Order Add";
         internal static string OrderDelete = "Order Delete";
         internal static string OrderUpdate = "Order Update";
-        internal static string ClaimAlreadyExists;
+        internal static string ClaimAlreadyExists = "Claim Already Exists";
+
     }
 }

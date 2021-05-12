@@ -25,11 +25,7 @@ namespace Business.DependencyResolvers.AutoFac
             builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
             builder.RegisterType<EfCategoryDal>().As<ICategoryDal>().SingleInstance();
 
-            builder.RegisterType<SupplierManager>().As<ISupplierService>().SingleInstance();
-            builder.RegisterType<EfSupplierDal>().As<ISupplierDal>().SingleInstance();
 
-            builder.RegisterType<CustomerManager>().As<ICustomerService>().SingleInstance();
-            builder.RegisterType<EfCustomerDal>().As<ICustomerDal>().SingleInstance();
 
 
             builder.RegisterType<TradeManager>().As<ITradeService>().SingleInstance();

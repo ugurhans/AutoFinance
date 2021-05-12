@@ -17,18 +17,14 @@ namespace DataAccess.Concrate.EntityFrameWork
             using (AutoFinanceContext context = new AutoFinanceContext())
             {
                 var result = from o in context.Orders
-                             join c in context.Customers
-                                 on o.CustomerId equals c.Id
                              join u in context.Users
-                                 on c.UserId equals u.Id
+                                 on o.UserId equals u.Id
                              select new OrderDto()
                              {
-                                 Id = o.Id,
-                                 CustomerName = u.Name + u.LastName,
+                                 CustomerName = u.Name + "" + u.LastName,
                                  OrderAmount = o.OrderAmount,
                                  OrderProductName = o.OrderProductName,
-                                 Price = o.Price,
-
+                                 Price = o.Price
                              };
                 return filter == null ? result.ToList() : result.Where(filter).ToList();
             }

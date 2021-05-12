@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Core.Utilities.Results;
 using Entities.Concrate;
+using Entities.DTOs;
 
 namespace Business.Abstract
 {
@@ -13,6 +14,9 @@ namespace Business.Abstract
         IResult Add(Wallet wallet);
         IResult Delete(Wallet wallet);
         IResult Update(Wallet wallet);
+
+        IDataResult<List<WalletDto>> GetAllDetails();
+        IDataResult<List<WalletDto>> GetAllDetailsByUserId(int userId);
 
         IResult VerifyWallet(Wallet wallet);
     }

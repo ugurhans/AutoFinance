@@ -19,20 +19,17 @@ namespace DataAccess.Concrate.EntityFrameWork
                 var result = from p in context.Products
                              join c in context.Categories
                                  on p.CategoryId equals c.Id
-                             join s in context.Suppliers
-                                 on p.SupplierId equals s.Id
+                             join u in context.Users
+                                 on p.UserId equals u.Id
                              select new ProductDetailDto()
                              {
-                                 Id = p.Id,
+                                 Name = p.Name,
                                  CategoryName = c.CategoryName,
                                  Description = p.Description,
-                                 Name = p.Name,
                                  Price = p.Price,
                                  StockAmount = p.StockAmount,
-                                 CategoryId = p.CategoryId,
-                                 SupplierId = p.SupplierId,
-                                 SupplierName = (from u in context.Users where u.Id == s.UserId select u.Name).FirstOrDefault(),
-                                 ToVerify = p.ToVerify
+                                 SupplierName = u.Name + "" + u.LastName,
+                                 ToVerify = p.ToVerify,
                              };
                 return filter == null ? result.ToList() : result.Where(filter).ToList();
             }

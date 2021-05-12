@@ -8,6 +8,7 @@ using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrate;
+using Entities.DTOs;
 
 namespace Business.Concrate
 {
@@ -60,6 +61,16 @@ namespace Business.Concrate
             return new SuccessResult(message: "Wallet Updated");
         }
 
+        public IDataResult<List<WalletDto>> GetAllDetails()
+        {
+            return new SuccessDataResult<List<WalletDto>>(_walletDal.getAllWalletDtos());
+        }
+
+        public IDataResult<List<WalletDto>> GetAllDetailsByUserId(int userId)
+        {
+            return new SuccessDataResult<List<WalletDto>>(_walletDal.getAllWalletDtos(w => w.UserId == userId));
+
+        }
 
 
         [ValidationAspect(typeof(WalletValidator))]
