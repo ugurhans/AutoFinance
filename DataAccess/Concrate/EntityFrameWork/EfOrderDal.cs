@@ -24,7 +24,7 @@ namespace DataAccess.Concrate.EntityFrameWork
                                  CustomerName = u.Name + "" + u.LastName,
                                  OrderAmount = o.OrderAmount,
                                  OrderProductName = o.OrderProductName,
-                                 Price = o.Price
+
                              };
                 return filter == null ? result.ToList() : result.Where(filter).ToList();
             }

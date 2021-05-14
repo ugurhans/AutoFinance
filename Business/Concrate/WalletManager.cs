@@ -81,5 +81,15 @@ namespace Business.Concrate
             _walletDal.Update(wallet);
             return new SuccessResult("Wallet Verified");
         }
+
+        public IDataResult<List<WalletDto>> GetVerifiedDetailsByUserId(int userId)
+        {
+            return new SuccessDataResult<List<WalletDto>>(_walletDal.getAllWalletDtos(w => w.ToVerify == true && w.UserId == userId));
+        }
+
+        public IDataResult<Wallet> GetByUserId(int userId)
+        {
+            return new SuccessDataResult<Wallet>(_walletDal.Get(w => w.UserId == userId));
+        }
     }
 }

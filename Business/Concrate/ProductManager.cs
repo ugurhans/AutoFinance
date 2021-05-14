@@ -108,7 +108,7 @@ namespace Business.Concrate
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Update(Product product)
         {
-            product.ToVerify = false;
+
             _productDal.Update(product);
             return new SuccessResult(Messages.ProductUpdated);
         }

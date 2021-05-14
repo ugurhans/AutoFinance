@@ -12,9 +12,10 @@ namespace Business.ValidationRules.FluentValidation
         {
 
             RuleFor(t => t.SellDate).NotEmpty();
+            RuleFor(t => t.CustomerId).NotEqual(t => t.SupplierId);
             RuleFor(t => t.TradeAmount).GreaterThan(1);
             RuleFor(t => t.TradeAmount).NotEmpty();
-            RuleFor(t => t.ProductId).NotEmpty();
+            RuleFor(t => t.ProductName).NotEmpty();
             RuleFor(t => t.CustomerId).NotEmpty();
         }
 

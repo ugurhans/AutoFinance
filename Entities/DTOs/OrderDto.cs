@@ -11,6 +11,6 @@ namespace Entities.DTOs
         public string OrderProductName { get; set; }
         public int OrderAmount { get; set; }
         public string CustomerName { get; set; }
-        public decimal Price { get; set; }
+
     }
 }

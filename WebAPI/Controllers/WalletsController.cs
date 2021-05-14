@@ -56,10 +56,35 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getaverifieddetailsbyuserid")]
+        public IActionResult getVerifiedDetailsByUserId(int userId)
+        {
+            var result = _walletService.GetVerifiedDetailsByUserId(userId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
         [HttpGet("getallById")]
         public IActionResult GetAllById(int walletId)
         {
             var result = _walletService.GetById(walletId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+
+        [HttpGet("getallByUserId")]
+        public IActionResult GetAllByUserIdId(int userId)
+        {
+            var result = _walletService.GetByUserId(userId);
             if (result.Success)
             {
                 return Ok(result);

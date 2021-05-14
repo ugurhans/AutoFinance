@@ -14,7 +14,8 @@ namespace DataAccess.Concrate.EntityFramework
 {
     public class EfWalletDal : EfEntityRepositoryBase<Wallet, AutoFinanceContext>, IWalletDal
     {
-        public List<WalletDto> getAllWalletDtos(Expression<Func<WalletDto, bool>> filter = null)
+
+        List<WalletDto> IWalletDal.getAllWalletDtos(Expression<Func<WalletDto, bool>> filter)
         {
             using (AutoFinanceContext context = new AutoFinanceContext())
             {
@@ -27,7 +28,8 @@ namespace DataAccess.Concrate.EntityFramework
                                  UserName = u.Name,
                                  UserLastName = u.LastName,
                                  Balance = w.Balance,
-                                 ToVerify = w.ToVerify
+                                 ToVerify = w.ToVerify,
+                                 WalletId = w.Id
                              };
                 return filter == null ? result.ToList() : result.Where(filter).ToList();
             }

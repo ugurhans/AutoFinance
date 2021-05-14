@@ -19,5 +19,7 @@ namespace Business.Abstract
         IDataResult<List<WalletDto>> GetAllDetailsByUserId(int userId);
 
         IResult VerifyWallet(Wallet wallet);
+        IDataResult<List<WalletDto>> GetVerifiedDetailsByUserId(int userId);
+        IDataResult<Wallet> GetByUserId(int userId);
     }
 }

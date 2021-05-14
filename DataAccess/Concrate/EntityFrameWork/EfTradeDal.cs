@@ -17,22 +17,20 @@ namespace DataAccess.Concrate.EntityFrameWork
             using (AutoFinanceContext context = new AutoFinanceContext())
             {
                 var result = from t in context.Trades
-                             join o in context.Orders
-                                 on t.OrderId equals o.Id
-                             join p in context.Products
-                                 on t.ProductId equals p.Id
-                             join u in context.Users
-                                 on t.CustomerId equals u.Id
-                             join us in context.Users
-                                 on t.SupplierId equals us.Id
+                             join cus in context.Users
+                                 on t.CustomerId equals cus.Id
+                             join sus in context.Users
+                                 on t.SupplierId equals sus.Id
+
+
                              select new TradeDto
                              {
-                                 SupplierName = us.Name + " " + us.LastName,
-                                 CustomerName = u.Name + "" + us.LastName,
-                                 ProductName = p.Name,
+                                 SupplierName = sus.Name + " " + sus.LastName,
+                                 CustomerName = cus.Name + " " + cus.LastName,
+                                 ProductName = t.ProductName,
                                  SellDate = t.SellDate,
-                                 TradeAmount = o.OrderAmount,
-                                 TradePrice = o.Price
+                                 TradeAmount = t.TradeAmount,
+                                 TradePrice = t.TradePrice
                              };
                 return filter == null ? result.ToList() : result.Where(filter).ToList();
             }
