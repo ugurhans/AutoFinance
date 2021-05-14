@@ -7,6 +7,7 @@ using Core.Entities.Concrate;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using Entities.DTOs;
 
 namespace Business.Concrate
 {
@@ -30,6 +31,11 @@ namespace Business.Concrate
             return new SuccessResult();
         }
 
+        public IDataResult<List<UserOperationClaimDto>> GetUsersClaimsById(int userId)
+        {
+            return new SuccessDataResult<List<UserOperationClaimDto>>(_userOperationClaimDal.GetUsersClaimsDto(oc => oc.UserId == userId));
+        }
+
         public IResult CheckClaimExists(UserOperationClaim userOperationClaim)
         {
             var result = _userOperationClaimDal.GetAll(u => u.UserId == userOperationClaim.UserId);
@@ -42,5 +48,11 @@ namespace Business.Concrate
             }
             return new SuccessResult();
         }
+
+        public List<OperationClaim> GetClaims(User user)
+        {
+            return _userOperationClaimDal.GetClaims(user);
+        }
+
     }
 }

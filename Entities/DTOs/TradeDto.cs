@@ -7,7 +7,6 @@ namespace Entities.DTOs
 {
     public class TradeDto : IDto
     {
-        public int Id { get; set; }
         public DateTime SellDate { get; set; }
         public int TradeAmount { get; set; }
         public string CustomerName { get; set; }

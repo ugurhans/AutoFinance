@@ -49,6 +49,7 @@ namespace Business.DependencyResolvers.AutoFac
 
 
 
+
             builder.RegisterType<AuthManager>().As<IAuthService>();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();
 

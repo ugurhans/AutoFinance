@@ -16,6 +16,6 @@ namespace Business.Abstract
         IResult Update(Trade trade);
 
         IDataResult<List<TradeDto>> GetTradeDto();
-        IDataResult<List<TradeDto>> GetTradeDtoById(int tradeId);
+
     }
 }

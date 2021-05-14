@@ -13,7 +13,7 @@ namespace Entities.Concrate
         public decimal Price { get; set; }
         public int StockAmount { get; set; }
         public string Description { get; set; }
-        public int UserId { get; set; }
+        public int SupplierId { get; set; }
         public bool ToVerify { get; set; }
 
 

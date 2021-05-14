@@ -15,12 +15,16 @@ namespace Business.Concrete
     {
         private IUserService _userService;
         private ITokenHelper _tokenHelper;
+        private IUserOperationClaimService _operationClaimService;
 
-        public AuthManager(IUserService userService, ITokenHelper tokenHelper)
+
+        public AuthManager(IUserService userService, ITokenHelper tokenHelper, IUserOperationClaimService operationClaimService)
         {
             _userService = userService;
             _tokenHelper = tokenHelper;
+            _operationClaimService = operationClaimService;
         }
+
 
         public IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password)
         {
@@ -66,7 +70,7 @@ namespace Business.Concrete
 
         public IDataResult<AccessToken> CreateAccessToken(User user)
         {
-            var claims = _userService.GetClaims(user);
+            var claims = _operationClaimService.GetClaims(user);
             var accessToken = _tokenHelper.CreateToken(user, claims);
             return new SuccessDataResult<AccessToken>(accessToken, Messages.AccessTokenCreated);
         }

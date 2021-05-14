@@ -23,6 +23,7 @@ namespace DataAccess.Concrate.EntityFramework
                                  on w.UserId equals u.Id
                              select new WalletDto()
                              {
+                                 UserId = w.UserId,
                                  UserName = u.Name,
                                  UserLastName = u.LastName,
                                  Balance = w.Balance,

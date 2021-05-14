@@ -42,10 +42,7 @@ namespace Business.Concrate
 
 
 
-        public IDataResult<List<TradeDto>> GetTradeDtoById(int tradeId)
-        {
-            return new SuccessDataResult<List<TradeDto>>(_tradeDal.GetTradeDtos(t => t.Id == tradeId));
-        }
+
 
 
         [ValidationAspect(typeof(TradeValidator))]

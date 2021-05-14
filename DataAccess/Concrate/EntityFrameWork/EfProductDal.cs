@@ -20,9 +20,10 @@ namespace DataAccess.Concrate.EntityFrameWork
                              join c in context.Categories
                                  on p.CategoryId equals c.Id
                              join u in context.Users
-                                 on p.UserId equals u.Id
+                                 on p.SupplierId equals u.Id
                              select new ProductDetailDto()
                              {
+                                 ProductId = p.Id,
                                  Name = p.Name,
                                  CategoryName = c.CategoryName,
                                  Description = p.Description,

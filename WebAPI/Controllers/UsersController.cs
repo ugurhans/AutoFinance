@@ -14,11 +14,16 @@ namespace WebAPI.Controllers
     public class UsersController : ControllerBase
     {
         private IUserService _userService;
-
-        public UsersController(IUserService userService)
+        private IOperationClaimService _operationClaimService;
+        private IUserOperationClaimService _userOperationClaimService;
+        public UsersController(IUserService userService, IOperationClaimService operationClaimService, IUserOperationClaimService userOperationClaimService)
         {
             _userService = userService;
+            _operationClaimService = operationClaimService;
+            _userOperationClaimService = userOperationClaimService;
         }
+
+
 
         [HttpGet("getallusers")]
         public IActionResult getAllUsers()
@@ -32,22 +37,11 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getuserbyid")]
-        public IActionResult getUserById(int userId)
-        {
-            var result = _userService.GetById(userId);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result);
-        }
 
         [HttpGet("getuserbymail")]
         public IActionResult getUserByMail(string email)
         {
-            var result = _userService.GetByEmailData(email);
+            var result = _userService.GetByMailData(email);
             if (result.Success)
             {
                 return Ok(result);
@@ -67,6 +61,9 @@ namespace WebAPI.Controllers
 
             return BadRequest(result);
         }
+
+
+
         [HttpPost("deleteuser")]
         public IActionResult deleteUser(User user)
         {
@@ -102,17 +99,6 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getallusersdtobyid")]
-        public IActionResult getAllUsersDtoById(int userId)
-        {
-            var result = _userService.getAllUserDtoById(userId);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result);
-        }
 
         [HttpGet("getuserdtobymail")]
         public IActionResult getUserDtoByMail(string email)
@@ -125,5 +111,43 @@ namespace WebAPI.Controllers
 
             return BadRequest(result);
         }
+
+
+        [HttpGet("getclaimsdtobyid")]
+        public IActionResult getClaimsDtoById(int userId)
+        {
+            var result = _userOperationClaimService.GetUsersClaimsById(userId);
+            if (result.Success)
+            {
+                return Ok(result);
+
+            }
+
+            return BadRequest(result);
+        }
+
+
+        [HttpGet("getalloperationclaims")]
+        public IActionResult GetAllOperationClaims()
+        {
+            var result = _operationClaimService.GetAll();
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+        [HttpPost("adduseroperationclaims")]
+        public IActionResult AddUserOperaitonClaim(UserOperationClaim userOperationClaim)
+        {
+            var result = _userOperationClaimService.Add(userOperationClaim);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
     }
 }

@@ -56,17 +56,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getallDetailsById")]
-        public IActionResult GetAllDetailsById(int tradeId)
-        {
-            var result = _tradeService.GetTradeDtoById(tradeId);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
 
-            return BadRequest(result);
-        }
 
         [HttpPost("addtrade")]
         public IActionResult addTrade(Trade trade)
