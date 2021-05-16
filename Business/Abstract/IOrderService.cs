@@ -17,5 +17,7 @@ namespace Business.Abstract
 
         IDataResult<List<OrderDto>> GetOrdersDto();
         IDataResult<List<OrderDto>> GetOrderDtoByUserId(int userId);
+
+        IDataResult<Order> GetOrderByUserIdOrder(int userId);
     }
 }

@@ -68,6 +68,19 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+
+        [HttpGet("getbyuserid")]
+        public IActionResult getByUserId(int userId)
+        {
+            var result = _orderService.GetOrderByUserIdOrder(userId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
         [HttpPost("addorder")]
         public IActionResult addOrder(Order order)
         {

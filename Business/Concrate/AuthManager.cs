@@ -37,7 +37,10 @@ namespace Business.Concrete
                 LastName = userForRegisterDto.LastName,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
-                Status = true
+                Status = true,
+                Address = userForRegisterDto.Address,
+                Phone = userForRegisterDto.Phone,
+                TcNo = userForRegisterDto.TcNo
             };
             _userService.Add(user);
             return new SuccessDataResult<User>(user, Messages.UserRegistered);

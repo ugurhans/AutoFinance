@@ -57,5 +57,11 @@ namespace Business.Concrate
         {
             return new SuccessDataResult<List<OrderDto>>(_orderDal.GetOrderDetail(o => o.Id == userId));
         }
+
+
+        public IDataResult<Order> GetOrderByUserIdOrder(int userId)
+        {
+            return new SuccessDataResult<Order>(_orderDal.Get(o => o.UserId == userId));
+        }
     }
 }

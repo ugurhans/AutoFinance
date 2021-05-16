@@ -12,6 +12,8 @@ namespace Entities.DTOs
         public string LastName { get; set; }
         public string Email { get; set; }
         public decimal Balance { get; set; }
-
+        public string TcNo { get; set; }
+        public string Phone { get; set; }
+        public string Address { get; set; }
     }
 }
