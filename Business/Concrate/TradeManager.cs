@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml;
 using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
@@ -67,5 +68,7 @@ namespace Business.Concrate
             _tradeDal.Update(trade);
             return new SuccessResult(Messages.TradeUpdated);
         }
+
+
     }
 }

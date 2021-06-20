@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Core.Entities;
+using Microsoft.VisualBasic;
 
 namespace Entities.Concrate
 {
@@ -14,5 +15,6 @@ namespace Entities.Concrate
         public DateTime SellDate { get; set; }
         public int TradeAmount { get; set; }
         public decimal TradePrice { get; set; }
+        public double Tax { get; set; }
     }
 }

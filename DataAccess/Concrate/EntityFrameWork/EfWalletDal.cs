@@ -29,7 +29,10 @@ namespace DataAccess.Concrate.EntityFramework
                                  UserLastName = u.LastName,
                                  Balance = w.Balance,
                                  ToVerify = w.ToVerify,
-                                 WalletId = w.Id
+                                 WalletId = w.Id,
+                                 BalanceUs = w.BalanceUs,
+                                 BalanceEUR = w.BalanceEur,
+                                 BalanceFR = w.BalanceFr
                              };
                 return filter == null ? result.ToList() : result.Where(filter).ToList();
             }

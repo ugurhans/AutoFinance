@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Business.Abstract;
 using Entities.Concrate;
 using Entities.DTOs;
+using Business.Constants;
 
 namespace WebAPI.Controllers
 {
@@ -85,7 +86,11 @@ namespace WebAPI.Controllers
         [HttpPost("addtradePro")]
         public IActionResult addTradePro([FromBody] TradeA a)
         {
+            var taxPur = 0.25;
+            decimal tradePrice = 0;
+
             var resultProduct = _productService.GetProductById(a.productId);
+
             Product product = resultProduct.Data;
 
             var resultOrder = _orderService.GetById(a.orderId);
@@ -96,7 +101,10 @@ namespace WebAPI.Controllers
                 var supplierWallet = _walletService.GetByUserId(product.SupplierId).Data;
 
                 var tradeAmount = product.StockAmount >= order.OrderAmount ? order.OrderAmount : product.StockAmount;
-
+                if (product.Price >= order.OrderPrice)
+                {
+                    tradePrice = order.OrderPrice * order.OrderAmount;
+                }
                 var trade = new Trade()
                 {
                     ProductName = product.Name,
@@ -104,9 +112,11 @@ namespace WebAPI.Controllers
                     SellDate = DateTime.Now,
                     SupplierId = product.SupplierId,
                     TradeAmount = tradeAmount,
-                    TradePrice = product.Price
+                    TradePrice = tradePrice,
+                    Tax = taxPur * tradeAmount * (double)tradePrice
                 };
 
+                var tax = taxPur * (double)trade.TradePrice;
                 if (customerWallet.Balance >= trade.TradePrice && order.OrderPrice <= product.Price)
                 {
                     var result = _tradeService.Add(trade);
@@ -139,10 +149,6 @@ namespace WebAPI.Controllers
 
                     return Ok(result);
                 }
-            }
-            else
-            {
-                return BadRequest(400);
             }
 
             return BadRequest();
