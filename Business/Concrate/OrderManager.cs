@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrate;
@@ -14,9 +17,11 @@ namespace Business.Concrate
     {
         private IOrderDal _orderDal;
 
-        public OrderManager(IOrderDal orderDal)
+
+        public OrderManager(IOrderDal orderDal, IProductDal productDal)
         {
             _orderDal = orderDal;
+
         }
 
         public IDataResult<List<Order>> GetAll()
@@ -26,13 +31,31 @@ namespace Business.Concrate
 
         public IDataResult<Order> GetById(int orderId)
         {
-            return new SuccessDataResult<Order>(_orderDal.Get(o => o.Id == orderId));
+            return new SuccessDataResult<Order>(_orderDal.Get(o => o.OrderId == orderId));
         }
 
+
+        [ValidationAspect(typeof(OrderValidator))]
         public IResult Add(Order order)
         {
-            _orderDal.Add(order);
-            return new SuccessResult(Messages.OrderAdd);
+            if (ChechkName(order.OrderProductName, order.UserId))
+            {
+                _orderDal.Add(order);
+                return new SuccessResult(Messages.OrderAdd);
+            }
+
+            return new ErrorResult("Ürün ismi daha önce eklenmiş");
+        }
+
+        private bool ChechkName(string orderOrderProductName, int orderUserId)
+        {
+            var result = _orderDal.Get(o => o.OrderProductName == orderOrderProductName && o.UserId == orderUserId);
+            if (result != null)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public IResult Delete(Order order)
@@ -55,13 +78,20 @@ namespace Business.Concrate
 
         public IDataResult<List<OrderDto>> GetOrderDtoByUserId(int userId)
         {
-            return new SuccessDataResult<List<OrderDto>>(_orderDal.GetOrderDetail(o => o.Id == userId));
+            return new SuccessDataResult<List<OrderDto>>(_orderDal.GetOrderDetail(o => o.OrderId == userId));
         }
 
-
-        public IDataResult<Order> GetOrderByUserIdOrder(int userId)
+        IDataResult<List<Order>> IOrderService.GetOrderByUserIdOrder(int userId)
         {
-            return new SuccessDataResult<Order>(_orderDal.Get(o => o.UserId == userId));
+            return new SuccessDataResult<List<Order>>(_orderDal.GetAll(o => o.UserId == userId));
         }
+
+        public IDataResult<Order> GetOrderByName(int userId, string orderName)
+        {
+            return new SuccessDataResult<Order>(_orderDal.Get(o =>
+                o.UserId == userId && o.OrderProductName.ToLower() == orderName.ToLower()));
+        }
+
     }
+
 }

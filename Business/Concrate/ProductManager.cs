@@ -85,7 +85,7 @@ namespace Business.Concrate
 
         [CacheRemoveAspect("IProductService.Get")]
         [ValidationAspect(typeof(ProductValidator))]
-        [SecuredOperation("supplier")]
+
         public IResult Add(Product product)
         {
             product.ToVerify = false;
@@ -123,6 +123,10 @@ namespace Business.Concrate
             return new SuccessResult(Messages.productVerified);
         }
 
-
+        public IDataResult<List<Product>> CheckProducts(string orderName)
+        {
+            return new SuccessDataResult<List<Product>>(
+                _productDal.GetAll(p => p.Name.ToLower() == orderName.ToLower()));
+        }
     }
 }

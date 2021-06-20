@@ -30,7 +30,8 @@ namespace DataAccess.Concrate.EntityFrameWork
                                  ProductName = t.ProductName,
                                  SellDate = t.SellDate,
                                  TradeAmount = t.TradeAmount,
-                                 TradePrice = t.TradePrice
+                                 TradePrice = t.TradePrice,
+                                 Tax = t.Tax
                              };
                 return filter == null ? result.ToList() : result.Where(filter).ToList();
             }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml;
 using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
@@ -33,15 +34,17 @@ namespace Business.Concrate
             return new SuccessDataResult<Trade>(_tradeDal.Get(t => t.Id == tradeId));
         }
 
+        public IDataResult<List<Trade>> GetByUserId(int userId)
+        {
+            return new SuccessDataResult<List<Trade>>(_tradeDal.GetAll(t => t.CustomerId == userId));
+        }
+
 
         [CacheAspect(15)]
         public IDataResult<List<TradeDto>> GetTradeDto()
         {
             return new SuccessDataResult<List<TradeDto>>(_tradeDal.GetTradeDtos());
         }
-
-
-
 
 
 
@@ -57,7 +60,7 @@ namespace Business.Concrate
         [CacheRemoveAspect("ITradeService.Get")]
         public IResult Delete(Trade trade)
         {
-            _tradeDal.Add(trade);
+            _tradeDal.Delete(trade);
             return new SuccessResult(Messages.TradeDeleted);
         }
 
@@ -66,8 +69,10 @@ namespace Business.Concrate
         [CacheRemoveAspect("ITradeService.Get")]
         public IResult Update(Trade trade)
         {
-            _tradeDal.Add(trade);
+            _tradeDal.Update(trade);
             return new SuccessResult(Messages.TradeUpdated);
         }
+
+
     }
 }

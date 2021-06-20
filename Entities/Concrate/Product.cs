@@ -15,7 +15,5 @@ namespace Entities.Concrate
         public string Description { get; set; }
         public int SupplierId { get; set; }
         public bool ToVerify { get; set; }
-
-
     }
 }

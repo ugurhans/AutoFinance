@@ -10,6 +10,9 @@ namespace Entities.Concrate
         public int Id { get; set; }
         public int UserId { get; set; }
         public decimal Balance { get; set; }
+        public decimal BalanceUs { get; set; }
+        public decimal BalanceFr { get; set; }
+        public decimal BalanceEur { get; set; }
         public bool ToVerify { get; set; }
     }
 }

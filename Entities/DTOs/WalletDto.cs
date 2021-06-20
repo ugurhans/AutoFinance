@@ -11,6 +11,9 @@ namespace Entities.DTOs
         public string UserName { get; set; }
         public string UserLastName { get; set; }
         public decimal Balance { get; set; }
+        public decimal BalanceUs { get; set; }
+        public decimal BalanceEUR { get; set; }
+        public decimal BalanceFR { get; set; }
         public bool ToVerify { get; set; }
         public int WalletId { get; set; }
     }
