@@ -11,6 +11,7 @@ namespace Business.Abstract
     {
         IDataResult<List<Trade>> GetAll();
         IDataResult<Trade> GetById(int tradeId);
+        IDataResult<List<Trade>> GetByUserId(int userId);
         IResult Add(Trade trade);
         IResult Delete(Trade trade);
         IResult Update(Trade trade);

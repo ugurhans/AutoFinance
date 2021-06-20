@@ -34,6 +34,10 @@ namespace Business.Concrate
             return new SuccessDataResult<Trade>(_tradeDal.Get(t => t.Id == tradeId));
         }
 
+        public IDataResult<List<Trade>> GetByUserId(int userId)
+        {
+            return new SuccessDataResult<List<Trade>>(_tradeDal.GetAll(t => t.CustomerId == userId));
+        }
 
 
         [CacheAspect(15)]

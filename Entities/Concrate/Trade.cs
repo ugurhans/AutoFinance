@@ -15,6 +15,6 @@ namespace Entities.Concrate
         public DateTime SellDate { get; set; }
         public int TradeAmount { get; set; }
         public decimal TradePrice { get; set; }
-        public double Tax { get; set; }
+        public decimal Tax { get; set; }
     }
 }

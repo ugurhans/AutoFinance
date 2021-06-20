@@ -51,6 +51,18 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getByUserId")]
+        public IActionResult GetByUserId(int userId)
+        {
+            var result = _tradeService.GetByUserId(userId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
         [HttpGet("getallDetails")]
         public IActionResult GetAllDetails()
         {
@@ -77,23 +89,18 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        public class TradeA
-        {
-            public int productId { get; set; }
-            public int orderId { get; set; }
-        }
 
         [HttpPost("addtradePro")]
-        public IActionResult addTradePro([FromBody] TradeA a)
+        public IActionResult addTradePro([FromBody] TradeProps props)
         {
-            var taxPur = 0.25;
+            decimal taxPur = 25;
             decimal tradePrice = 0;
 
-            var resultProduct = _productService.GetProductById(a.productId);
+            var resultProduct = _productService.GetProductById(props.productId);
 
             Product product = resultProduct.Data;
 
-            var resultOrder = _orderService.GetById(a.orderId);
+            var resultOrder = _orderService.GetById(props.orderId);
             if (resultOrder.Data != null)
             {
                 Order order = resultOrder.Data;
@@ -113,11 +120,10 @@ namespace WebAPI.Controllers
                     SupplierId = product.SupplierId,
                     TradeAmount = tradeAmount,
                     TradePrice = tradePrice,
-                    Tax = taxPur * tradeAmount * (double)tradePrice
+                    Tax = (taxPur / 100) * tradeAmount * tradePrice
                 };
 
-                var tax = taxPur * (double)trade.TradePrice;
-                if (customerWallet.Balance >= trade.TradePrice && order.OrderPrice <= product.Price)
+                if (customerWallet.Balance >= trade.TradePrice && order.OrderPrice >= product.Price)
                 {
                     var result = _tradeService.Add(trade);
 
