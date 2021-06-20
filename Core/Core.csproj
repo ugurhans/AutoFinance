@@ -9,6 +9,7 @@
 		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
 		<PackageReference Include="Autofac.Extras.DynamicProxy" Version="6.0.0" />
 		<PackageReference Include="FluentValidation" Version="10.1.0" />
+		<PackageReference Include="iTextSharp" Version="5.5.13.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.5" />
@@ -16,6 +17,12 @@
 		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="5.0.0" />
 		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.11.0" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.11.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="itextsharp">
+	    <HintPath>..\..\..\..\OneDrive\Masaüstü\itextsharp.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 
 </Project>

@@ -25,6 +25,6 @@ namespace Business.Abstract
         IResult Update(Product product);
         IResult ToVerify(Product product);
 
-
+        IDataResult<List<Product>> CheckProducts(string orderName);
     }
 }

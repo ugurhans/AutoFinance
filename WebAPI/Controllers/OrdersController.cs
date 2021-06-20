@@ -14,10 +14,14 @@ namespace WebAPI.Controllers
     public class OrdersController : ControllerBase
     {
         private IOrderService _orderService;
+        private IProductService _productService;
+        private ITradeService _tradeService;
 
-        public OrdersController(IOrderService orderService)
+        public OrdersController(IOrderService orderService, ITradeService tradeService, IProductService productService)
         {
             _orderService = orderService;
+            _tradeService = tradeService;
+            _productService = productService;
         }
 
         [HttpGet("getall")]
@@ -70,9 +74,9 @@ namespace WebAPI.Controllers
 
 
         [HttpGet("getbyuserid")]
-        public IActionResult getByUserId(int userId)
+        public IActionResult getByUserId(int userId, string orderName)
         {
-            var result = _orderService.GetOrderByUserIdOrder(userId);
+            var result = _orderService.GetOrderByName(userId, orderName);
             if (result.Success)
             {
                 return Ok(result);

@@ -34,14 +34,12 @@ namespace Business.Concrate
         }
 
 
+
         [CacheAspect(15)]
         public IDataResult<List<TradeDto>> GetTradeDto()
         {
             return new SuccessDataResult<List<TradeDto>>(_tradeDal.GetTradeDtos());
         }
-
-
-
 
 
 
@@ -57,7 +55,7 @@ namespace Business.Concrate
         [CacheRemoveAspect("ITradeService.Get")]
         public IResult Delete(Trade trade)
         {
-            _tradeDal.Add(trade);
+            _tradeDal.Delete(trade);
             return new SuccessResult(Messages.TradeDeleted);
         }
 
@@ -66,7 +64,7 @@ namespace Business.Concrate
         [CacheRemoveAspect("ITradeService.Get")]
         public IResult Update(Trade trade)
         {
-            _tradeDal.Add(trade);
+            _tradeDal.Update(trade);
             return new SuccessResult(Messages.TradeUpdated);
         }
     }

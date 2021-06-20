@@ -6,18 +6,24 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Entities.Concrate;
+using Entities.DTOs;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
     public class TradesController : ControllerBase
     {
         private ITradeService _tradeService;
+        private IProductService _productService;
+        private IOrderService _orderService;
+        private IWalletService _walletService;
 
-        public TradesController(ITradeService tradeService)
+        public TradesController(ITradeService tradeService, IOrderService orderService, IProductService productService, IWalletService walletService)
         {
             _tradeService = tradeService;
+            _orderService = orderService;
+            _productService = productService;
+            _walletService = walletService;
         }
 
         [HttpGet("getall")]
@@ -69,6 +75,79 @@ namespace WebAPI.Controllers
 
             return BadRequest(result);
         }
+
+        public class TradeA
+        {
+            public int productId { get; set; }
+            public int orderId { get; set; }
+        }
+
+        [HttpPost("addtradePro")]
+        public IActionResult addTradePro([FromBody] TradeA a)
+        {
+            var resultProduct = _productService.GetProductById(a.productId);
+            Product product = resultProduct.Data;
+
+            var resultOrder = _orderService.GetById(a.orderId);
+            if (resultOrder.Data != null)
+            {
+                Order order = resultOrder.Data;
+                var customerWallet = _walletService.GetByUserId(order.UserId).Data;
+                var supplierWallet = _walletService.GetByUserId(product.SupplierId).Data;
+
+                var tradeAmount = product.StockAmount >= order.OrderAmount ? order.OrderAmount : product.StockAmount;
+
+                var trade = new Trade()
+                {
+                    ProductName = product.Name,
+                    CustomerId = order.UserId,
+                    SellDate = DateTime.Now,
+                    SupplierId = product.SupplierId,
+                    TradeAmount = tradeAmount,
+                    TradePrice = product.Price
+                };
+
+                if (customerWallet.Balance >= trade.TradePrice && order.OrderPrice <= product.Price)
+                {
+                    var result = _tradeService.Add(trade);
+
+                    customerWallet.Balance -= trade.TradePrice;
+                    _walletService.Update(customerWallet);
+
+                    supplierWallet.Balance += trade.TradePrice;
+                    _walletService.Update(supplierWallet);
+
+                    if (tradeAmount > product.StockAmount)
+                    {
+                        order.OrderAmount -= tradeAmount;
+                        _orderService.Update(order);
+                        _productService.Delete(product);
+                    }
+
+                    else if (order.OrderAmount < product.StockAmount)
+                    {
+                        product.StockAmount -= tradeAmount;
+                        _productService.Update(product);
+                        _orderService.Delete(order);
+                    }
+
+                    else
+                    {
+                        _productService.Delete(product);
+                        _orderService.Delete(order);
+                    }
+
+                    return Ok(result);
+                }
+            }
+            else
+            {
+                return BadRequest(400);
+            }
+
+            return BadRequest();
+        }
+
 
         [HttpPost("deletetrade")]
         public IActionResult addeleteTrade(Trade trade)

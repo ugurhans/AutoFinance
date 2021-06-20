@@ -15,6 +15,7 @@ namespace Business.Abstract
         IResult Delete(Trade trade);
         IResult Update(Trade trade);
 
+
         IDataResult<List<TradeDto>> GetTradeDto();
 
     }
